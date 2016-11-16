@@ -1,0 +1,121 @@
+CREATE TABLE public.age_range_param
+(
+    age_range_id integer NOT NULL,
+    age_range_desc character varying(100) COLLATE public.pg_catalog,
+    CONSTRAINT age_range_param_pkey PRIMARY KEY (age_range_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.age_range_param
+    OWNER to postgres;
+
+CREATE TABLE public.occupation_param
+(
+    occupation_id integer NOT NULL,
+    occupation_desc character varying(100) COLLATE public.pg_catalog,
+    CONSTRAINT occupation_param_pkey PRIMARY KEY (occupation_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.occupation_param
+    OWNER to postgres;
+
+CREATE TABLE public.genre_info
+(
+    movieid integer,
+    genre character varying(100) COLLATE public.pg_catalog
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.genre_info
+    OWNER to postgres;
+
+CREATE TABLE public.movie_info
+(
+    movieid integer NOT NULL,
+    title character varying(100) COLLATE public.pg_catalog,
+    CONSTRAINT movie_info_pkey PRIMARY KEY (movieid)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.movie_info
+    OWNER to postgres;
+
+CREATE TABLE public.occupation_param
+(
+    occupation_id integer NOT NULL,
+    occupation_desc character varying(100) COLLATE public.pg_catalog,
+    CONSTRAINT occupation_param_pkey PRIMARY KEY (occupation_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.occupation_param
+    OWNER to postgres;
+
+-- Table: public.ratings
+
+-- DROP TABLE public.ratings;
+
+CREATE TABLE public.ratings
+(
+    userid integer,
+    movieid integer,
+    time_stamp double precision,
+    CONSTRAINT ratings_userid_fkey FOREIGN KEY (userid)
+        REFERENCES public.user_info (userid) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.ratings
+    OWNER to postgres;
+
+
+
+-- Table: public.user_info
+
+-- DROP TABLE public.user_info;
+
+CREATE TABLE public.user_info
+(
+    userid integer NOT NULL,
+    gender character varying(1) COLLATE public.pg_catalog,
+    age_range_id integer,
+    occupation_id integer,
+    zip_code double precision,
+    CONSTRAINT user_info_pkey PRIMARY KEY (userid),
+    CONSTRAINT user_info_age_range_id_fkey FOREIGN KEY (age_range_id)
+        REFERENCES public.age_range_param (age_range_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT user_info_occupation_id_fkey FOREIGN KEY (occupation_id)
+        REFERENCES public.occupation_param (occupation_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.user_info
+    OWNER to postgres;

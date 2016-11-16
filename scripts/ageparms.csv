@@ -1,0 +1,8 @@
+age_range_id,age_range_desc
+insert into age_range_param values (1,'Under 18');
+insert into age_range_param values (18,'18-24');
+insert into age_range_param values (25,'25-34');
+insert into age_range_param values (35,'35-44');
+insert into age_range_param values (45,'45-49');
+insert into age_range_param values (50,'50-55');
+insert into age_range_param values (56,'56+');
